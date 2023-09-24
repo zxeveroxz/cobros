@@ -17,4 +17,9 @@ class Login extends BaseController
         dd($m);
         return "esto es para vrear la vista 2";
     }
+
+    public function index2(){
+        
+        return view('tabla');
+    }
 }

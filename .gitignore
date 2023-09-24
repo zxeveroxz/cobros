@@ -125,3 +125,9 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
+public/tailwind/node_modules/
+public/tailwind/node_modules/*
+
+node_modules
+.node_modules
+.node_modules/*
