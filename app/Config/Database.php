@@ -43,6 +43,7 @@ class Database extends Config
         'failover'     => [],
         'port'         => 3306,
         'numberNative' => false,
+        
     ];
 
     public array $sqlsrv = [
@@ -51,7 +52,7 @@ class Database extends Config
         'username'     => '',
         'password'     => '',
         'database'     => '',
-        'DBDriver'     => 'MySQLi',
+        'DBDriver'     => 'SQLSRV',
         'DBPrefix'     => '',
         'pConnect'     => false,
         'DBDebug'      => true,
@@ -62,9 +63,11 @@ class Database extends Config
         'compress'     => false,
         'strictOn'     => false,
         'failover'     => [],
-        'port'         => 3306,
+        'port'         => 1433,
         'numberNative' => false,
     ];
+
+
 
     /**
      * This database connection is used when

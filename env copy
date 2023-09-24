@@ -14,13 +14,13 @@
 # ENVIRONMENT
 #--------------------------------------------------------------------
 
-# CI_ENVIRONMENT = production
+CI_ENVIRONMENT = development
 
 #--------------------------------------------------------------------
 # APP
 #--------------------------------------------------------------------
 
-# app.baseURL = ''
+app.baseURL = 'http://cobros.local:8080/'
 # If you have trouble with `.`, you could also use `_`.
 # app_baseURL = ''
 # app.forceGlobalSecureRequests = false
@@ -30,13 +30,25 @@
 # DATABASE
 #--------------------------------------------------------------------
 
-# database.default.hostname = localhost
-# database.default.database = ci4
-# database.default.username = root
-# database.default.password = root
-# database.default.DBDriver = MySQLi
-# database.default.DBPrefix =
-# database.default.port = 3306
+database.default.hostname = localhost
+database.default.database = ci4
+database.default.username = root
+database.default.password = root
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+database.default.port = 3306
+
+database.sqlsrv.hostname = 1.125.243.1
+database.sqlsrv.database = DBFREST
+database.sqlsrv.username = sass
+database.sqlsrv.password = massteeredkey
+database.sqlsrv.DBDriver = SQLSRV
+database.sqlsrv.DBPrefix =
+database.sqlsrv.port = 1433
+
+CI_ENV_MEMORY_LIMIT=650M
+CI_ENV_ClientBufferMaxKBSize=25M
+
 
 # database.tests.hostname = localhost
 # database.tests.database = ci4_test
