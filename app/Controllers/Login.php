@@ -22,4 +22,18 @@ class Login extends BaseController
         
         return view('tabla');
     }
+
+    public function tabla(){
+        $m = Model('Demo');
+        $r = $m->countAll();
+        //d($r);
+
+        $p = $this->request->getPost();
+        d($p);
+
+        $DATA = [ "draw"=> 1,
+        "recordsTotal"=> $r,
+        "recordsFiltered"=> $r];
+        echo json_encode($DATA);
+    }
 }
