@@ -25,15 +25,34 @@ class Login extends BaseController
 
     public function tabla(){
         $m = Model('Demo');
-        $r = $m->countAll();
+        $total = $m->countAll();
         //d($r);
 
         $p = $this->request->getPost();
-        d($p);
+       
+        $draw= $this->request->getPost('draw');
+        $limit = $this->request->getPost('start');
+        $offset = $this->request->getPost('length');
 
-        $DATA = [ "draw"=> 1,
-        "recordsTotal"=> $r,
-        "recordsFiltered"=> $r];
+        $c = $this->request->getPost('columns');
+        $columnas=[];
+        foreach($c as $r){
+            array_push($columnas,$r['name']);            
+        }
+        
+        $query = $m->select($columnas)->orderBy('CODCLIENTE', 'desc')->limit($offset,$limit)->get()->getResultArray();
+        $data = [];
+
+        foreach ($query as $row) {
+            $data[] = array_values($row);
+        }
+
+       // print_r($data);die;
+
+        $DATA = [ "draw"=> $draw,
+        "recordsTotal"=> $total,
+        "recordsFiltered"=> $total,
+        "data"=>$data];
         echo json_encode($DATA);
     }
 }

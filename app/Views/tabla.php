@@ -22,12 +22,12 @@
     <table id="example" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
     <thead>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th data-orderable="false">Start date</th>
-                <th>Salary</th>
+                <th data-name="CODCLIENTE">CODIGO</th>
+                <th data-name="NOMBRECLIENTE">NOMBRECLIENTE</th>
+                <th data-name="CIF">NRO. DOCUMENTO</th>
+                <th data-name="TELEFONO1">TELEFONO</th>
+                <th data-name="DIRECCION1" data-orderable="false">DIRECCION</th>
+                <th data-name="OBSERVACIONES">OBSERVACIONES</th>
             </tr>
         </thead>
     </table>
@@ -38,14 +38,10 @@
 
 <script>
     $(document).ready(function() {
-        new DataTable('#example', {
-            
-            ajax:  {url:'<?=base_url('login/tabla')?>',type:'POST'},
-            
+        new DataTable('#example', {            
+            ajax:  {url:'<?=base_url('login/tabla')?>',type:'POST'},            
             processing: true,
             serverSide: true,
-
-
         });
     });
 </script>
