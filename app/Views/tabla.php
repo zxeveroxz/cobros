@@ -13,34 +13,33 @@
 
 </head>
 
-<body class="p-5 bg-white dark:bg-gray-900 antialiased ">
+<body>
+    <div class="  bg-gray-500 h-screen w-screen p-5 ">
 
-
-
-
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table id="example" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead>
-                <tr>
-                    <th data-name="CODCLIENTE">CODIGO</th>
-                    <th data-name="NOMBRECLIENTE">NOMBRECLIENTE</th>
-                    <th data-name="CIF">NRO. DOCUMENTO</th>
-                    <th data-name="TELEFONO1">TELEFONO</th>
-                    <th data-name="DIRECCION1" data-orderable="false">DIRECCION</th>
-                    <th data-name="OBSERVACIONES">OBSERVACIONES</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th data-name="CODCLIENTE">CODIGO</th>
-                    <th data-name="NOMBRECLIENTE">NOMBRECLIENTE</th>
-                    <th data-name="CIF">NRO. DOCUMENTO</th>
-                    <th data-name="TELEFONO1">TELEFONO</th>
-                    <th data-name="DIRECCION1" data-orderable="false">DIRECCION</th>
-                    <th data-name="OBSERVACIONES">OBSERVACIONES</th>
-                </tr>
-            </tfoot>
-        </table>
+        <div class="w-full overflow-x-auto px-3">
+            <table id="example" class="table-auto min-w-full mx-auto text-left text-sm border-2 border-black  dark:text-white bg-gray-600 ">
+                <thead class="border-b font-medium bg-black">
+                    <tr>
+                        <th data-name="CODCLIENTE">CODIGO</th>
+                        <th data-name="NOMBRECLIENTE">NOMBRECLIENTE</th>
+                        <th data-name="CIF">NRO. DOCUMENTO</th>
+                        <th data-name="TELEFONO1">TELEFONO</th>
+                        <th data-name="DIRECCION1" data-orderable="false">DIRECCION</th>
+                        <th data-name="OBSERVACIONES">OBSERVACIONES</th>
+                    </tr>
+                </thead>
+                <tfoot class="border-b bg-black font-medium">
+                    <tr>
+                        <th data-name="CODCLIENTE">CODIGO</th>
+                        <th data-name="NOMBRECLIENTE">NOMBRECLIENTE</th>
+                        <th data-name="CIF">NRO. DOCUMENTO</th>
+                        <th data-name="TELEFONO1">TELEFONO</th>
+                        <th data-name="DIRECCION1" data-orderable="false">DIRECCION</th>
+                        <th data-name="OBSERVACIONES">OBSERVACIONES</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 
 </body>
@@ -67,6 +66,8 @@
                 url: '<?= base_url('login/tabla') ?>',
                 type: 'POST'
             },
+            "dom": 'rtip',
+          //  bFilter: false,
             processing: true,
             serverSide: true,
             initComplete: function() {
