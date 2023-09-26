@@ -46,8 +46,7 @@ class Login extends BaseController
             }  
             
         }
-        
-       
+               
         if(count($likeConditions)>0){
             $likeClause = implode(' OR ', $likeConditions);
             $m->where($likeClause,null,false);
