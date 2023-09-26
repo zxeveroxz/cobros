@@ -33,14 +33,44 @@ class Login extends BaseController
         $draw= $this->request->getPost('draw');
         $limit = $this->request->getPost('start');
         $offset = $this->request->getPost('length');
+        
 
         $c = $this->request->getPost('columns');
         $columnas=[];
+        $likeConditions = [];
         foreach($c as $r){
             array_push($columnas,$r['name']);            
+            if($r['search']['value']!==''){
+                $valor = '%' . $r['search']['value'] . '%';
+                $likeConditions[] = "{$r['name']} LIKE '$valor'";
+            }  
+            
         }
         
-        $query = $m->select($columnas)->orderBy('CODCLIENTE', 'desc')->limit($offset,$limit)->get()->getResultArray();
+       
+        if(count($likeConditions)>0){
+            $likeClause = implode(' OR ', $likeConditions);
+            $m->where($likeClause,null,false);
+        }
+
+        $totalfiltro = $m->countAllResults();
+
+        $m->select($columnas);
+        if(count($likeConditions)>0){
+            $likeClause = implode(' OR ', $likeConditions);
+            $m->where($likeClause,null,false);
+        }
+
+        $index = $p['order'][0]['column'];
+        $order = $p['order'][0]['dir'];
+        
+        $m->orderBy($columnas[$index], $order);        
+        $m->limit($offset,$limit);
+        $query = $m->get();
+ 
+        $query = $query->getResultArray();
+
+        
         $data = [];
 
         foreach ($query as $row) {
@@ -51,7 +81,7 @@ class Login extends BaseController
 
         $DATA = [ "draw"=> $draw,
         "recordsTotal"=> $total,
-        "recordsFiltered"=> $total,
+        "recordsFiltered"=> $totalfiltro,
         "data"=>$data];
         echo json_encode($DATA);
     }
