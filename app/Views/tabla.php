@@ -16,8 +16,8 @@
 <body>
     <div class="  bg-gray-500 h-screen w-screen p-5 ">
 
-        <div class="w-full overflow-x-auto px-3">
-            <table id="example" class="table-auto min-w-full mx-auto text-left text-sm border-2 border-black  dark:text-white bg-gray-600 ">
+        <div class="w-full overflow-x-auto p-3">
+            <table id="example" class="table-auto uppercase min-w-full mx-auto text-left text-sm border-2 border-black  dark:text-white bg-gray-600 ">
                 <thead class="border-b font-medium bg-black">
                     <tr>
                         <th data-name="CODCLIENTE">CODIGO</th>
@@ -40,6 +40,7 @@
                 </tfoot>
             </table>
         </div>
+        <input type="checkbox" id="activarBusqueda">
     </div>
 
 </body>
@@ -56,22 +57,92 @@
         padding: 3px;
         box-sizing: border-box;
     }
+
+    #example_paginate{
+        padding:5px 2px;
+        display: flex;
+        justify-content:stretch;
+  align-items: center;
+  flex-direction: column;
+    }
 </style>
 
 
 <script>
+    function calcularFilasAMostrar() {
+        const windowHeight = window.innerHeight;
+        const tableHeaderHeight = document.querySelector("#example thead").offsetHeight;
+
+        const rowHeight = 50; // Ajusta este valor según la altura de tus filas en píxeles.
+
+        const maxRows = Math.floor((windowHeight - (tableHeaderHeight)) / rowHeight);
+
+        return maxRows - 2;
+    }
+
+    function actualizarTabla() {
+        const maxRows = calcularFilasAMostrar();
+
+        const table = $('#example').DataTable();
+        table.page.len(maxRows).draw();
+    }
+
+
     $(document).ready(function() {
-        var table = new DataTable('#example', {
+        const table = new DataTable('#example', {
             ajax: {
                 url: '<?= base_url('login/tabla') ?>',
                 type: 'POST'
             },
             "dom": 'rtip',
-          //  bFilter: false,
+            "info": false,
+            columnDefs: [{
+                    width: '50px',
+                    targets: [0]
+                },
+                {
+                    width: '300px',
+                    targets: [1, 4]
+                },
+                {
+                    width: '150px',
+                    targets: [2, 3]
+                },
+
+                {
+                    visible: 1,
+                    targets: []
+                }
+            ],
+            // "autoWidth": false,
+            //  bFilter: false,
             processing: true,
             serverSide: true,
             initComplete: function() {
-                this.api()
+
+                $t = this;
+                // Referencia al checkbox
+                const checkbox = document.getElementById('activarBusqueda');
+
+                // Event listener para el cambio de estado del checkbox
+                checkbox.addEventListener('change', function() {
+                    const isChecked = this.checked;
+
+                    // Recorre todas las columnas y muestra u oculta el footer de búsqueda según el estado del checkbox
+                    $t.api().columns().every(function() {
+                        let column = this;
+                        let footer = column.footer();
+
+                        if (isChecked) {
+                            footer.style.display = 'none'; // Oculta el footer
+                        } else {
+                            footer.style.display = 'table-cell'; // Muestra el footer
+                        }
+                    });
+                });
+
+
+                $t.api()
                     .columns()
                     .every(function() {
                         let column = this;
@@ -101,7 +172,11 @@
 
         });
 
+        actualizarTabla();
 
+
+        // Actualiza la tabla cuando la ventana cambie de tamaño.
+        window.addEventListener("resize", actualizarTabla);
 
     });
 </script>
