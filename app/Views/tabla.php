@@ -14,9 +14,21 @@
 </head>
 
 <body>
-    <div class="  bg-gray-500 h-screen w-screen p-5 ">
 
-        <div class="w-full overflow-x-auto p-3">
+    <div class="  bg-gray-500 h-screen w-screen p-1  dark:bg-gray-800   ">
+
+        <div class="px-4 md:px-10 py-2  bg-gray-100 dark:bg-gray-700 rounded-tl-lg rounded-tr-lg">
+            <div class="flex items-center justify-between">
+                <p tabindex="0" class="focus:outline-none  text-xl  font-bold leading-normal text-gray-800 dark:text-white ">CLIENTES</p>
+                <div>
+                    <button class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 inline-flex sm:ml-3 mt-0 items-start justify-start px-5 py-2 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+                        <p class="text-sm font-medium leading-none text-white">New Project</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800  shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">
             <table id="example" class="table-auto uppercase min-w-full mx-auto text-left text-sm border-2 border-black  dark:text-white bg-gray-600 ">
                 <thead class="border-b font-medium bg-black">
                     <tr>
@@ -41,7 +53,9 @@
             </table>
         </div>
         <input type="checkbox" id="activarBusqueda">
+        https://app.tuk.dev/listing/webapp/table/advance_table
     </div>
+
 
 </body>
 
@@ -58,12 +72,12 @@
         box-sizing: border-box;
     }
 
-    #example_paginate{
-        padding:5px 2px;
+    #example_paginate {
+        padding: 5px 2px;
         display: flex;
-        justify-content:stretch;
-  align-items: center;
-  flex-direction: column;
+        justify-content: stretch;
+        align-items: center;
+        flex-direction: column;
     }
 </style>
 
@@ -77,13 +91,14 @@
 
         const maxRows = Math.floor((windowHeight - (tableHeaderHeight)) / rowHeight);
 
-        return maxRows - 2;
+        return maxRows - 3;
     }
 
     function actualizarTabla() {
         const maxRows = calcularFilasAMostrar();
 
         const table = $('#example').DataTable();
+
         table.page.len(maxRows).draw();
     }
 
