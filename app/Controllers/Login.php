@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Helpers\Componentes;
 use CodeIgniter\Model;
+
 
 class Login extends BaseController
 {
@@ -21,11 +23,13 @@ class Login extends BaseController
     }
 
     public function index2(){
-        
+        helper("Componentes_helper");
+     
         return view('tabla');
     }
 
-    public function tabla(){
+    public function tabla(){       
+
         $m = Model('Demo');
         $total = $m->countAll();
         //d($r);
